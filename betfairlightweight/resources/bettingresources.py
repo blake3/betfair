@@ -598,7 +598,7 @@ class MarketBook(BaseResource):
     
     def json(self) -> str:
         extra_fields = {
-            "market_definition": self.market_definition.json(),
+            "market_definition": self.market_definition.to_dict(),
             "streaming_unique_id": self.streaming_unique_id,
             "streaming_update": self.streaming_update
         }
