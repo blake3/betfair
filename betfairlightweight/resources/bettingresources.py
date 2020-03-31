@@ -1,4 +1,5 @@
 from .baseresource import BaseResource
+from .streamingresources import MarketDefinition
 
 
 class EventType:
@@ -561,6 +562,17 @@ class MarketBook(BaseResource):
     :type version: int
     """
 
+    @classmethod
+    def from_json(cls, json_data: str):
+        data = json.loads(json_data)
+        return cls.from_dict(data)
+
+    @classmethod
+    def from_dict(cls, data: Dict):
+        market_definition = MarketDefinition(**data.pop("market_definition"))
+        kwargs = {**data, "market_definition": market_definition}
+        return cls(**kwargs)
+
     def __init__(self, **kwargs):
         self.streaming_unique_id = kwargs.pop("streaming_unique_id", None)
         self.streaming_update = kwargs.pop("streaming_update", None)
@@ -595,6 +607,14 @@ class MarketBook(BaseResource):
             if kwargs.get("priceLadderDefinition")
             else None
         )
+    
+    def json(self) -> str:
+        extra_fields = {
+            "market_definition": self.market_definition.json(),
+            "streaming_unique_id": self.streaming_unique_id,
+            "streaming_update": self.streaming_update
+        }
+        return json.dumps({**self._data, **extra_fields})
 
 
 class CurrentOrder:

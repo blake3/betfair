@@ -170,3 +170,49 @@ class MarketDefinition:
 
         self.name = name  # historic data only
         self.event_name = eventName  # historic data only
+
+        self._data = {
+            "betDelay": betDelay
+            "bettingType": bettingType
+            "bspMarket": bspMarket
+            "bspReconciled": bspReconciled
+            "complete": complete
+            "crossMatching": crossMatching
+            "discountAllowed": discountAllowed
+            "eventId": eventId
+            "eventTypeId": eventTypeId
+            "inPlay": inPlay
+            "marketBaseRate": marketBaseRate
+            "marketTime": marketTime
+            "numberOfActiveRunners": numberOfActiveRunners
+            "numberOfWinners": numberOfWinners
+            "persistenceEnabled": persistenceEnabled
+            "regulators": regulators
+            "runnersVoidable": runnersVoidable
+            "status": status
+            "timezone": timezone
+            "turnInPlayEnabled": turnInPlayEnabled
+            "version": version
+            "runners": runners
+            "openDate": openDate
+            "countryCode": countryCode
+            "eachWayDivisor": eachWayDivisor
+            "venue": venue
+            "settledTime": settledTime
+            "suspendTime": suspendTime
+            "marketType": marketType
+            "lineMaxUnit": lineMaxUnit
+            "lineMinUnit": lineMinUnit
+            "lineInterval": lineInterval
+            "name": name
+            "eventName": eventName
+            "priceLadderDefinition": priceLadderDefinition
+            "keyLineDefinition": keyLineDefinition
+            "raceType": raceType
+        }
+
+        def json(self):
+            # Dump to dict rather than string because this will
+            # typically be called by the Marketbook dump which 
+            # will include this dict in the json string it produces
+            return json.dump(self._data)
