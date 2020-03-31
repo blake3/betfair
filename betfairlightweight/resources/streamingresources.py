@@ -211,8 +211,8 @@ class MarketDefinition:
             "raceType": raceType
         }
 
-        def json(self):
-            # Dump to dict rather than string because this will
-            # typically be called by the Marketbook dump which 
-            # will include this dict in the json string it produces
-            return json.dump(self._data)
+    def json(self):
+        # Dump to dict rather than string because this will
+        # typically be called by the Marketbook dump which 
+        # will include this dict in the json string it produces
+        return json.dump(self._data)
